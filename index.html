@@ -1,3 +1,4 @@
+<!-- FIXED index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +14,6 @@
       overflow-x: hidden;
     }
 
-    /* Binary animation background */
     .animated-bg {
       position: fixed;
       width: 100%;
@@ -31,15 +31,10 @@
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(-100%);
-      }
-      100% {
-        transform: translateY(120vh);
-      }
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(120vh); }
     }
 
-    /* Layout */
     .container {
       display: flex;
       justify-content: center;
@@ -51,7 +46,6 @@
       z-index: 1;
     }
 
-    /* User card */
     .card-container {
       perspective: 1000px;
       flex: 1;
@@ -114,7 +108,6 @@
       margin-bottom: 8px;
     }
 
-    /* Notes */
     .note-boxes {
       flex: 1.2;
       min-width: 300px;
@@ -165,66 +158,53 @@
   </style>
 </head>
 <body>
-
-<!-- Animated Binary Background -->
-<div class="animated-bg" id="binary-bg"></div>
-
-<!-- Main Content -->
-<div class="container">
-
-  <!-- Profile Card -->
-  <div class="card-container">
-    <div class="card" id="card">
+<div class="animated-bg" id="binary-bg" aria-hidden="true"></div>
+<main class="container">
+  <section class="card-container" aria-label="Lecturer Profile">
+    <article class="card" id="card">
       <div class="profile-pic">
-        <img src="pvs1.jpg" alt="Punith R" />
+        <img src="pvs1.jpg" alt="Portrait of Punith R, Computer Science Lecturer" />
       </div>
-      <h2>Punith r</h2>
+      <h2>Punith R</h2>
       <h3>Lecturer – Computer Science</h3>
       <div class="info">
         <span>🏫 Universal PU College</span>
         <span>📅 1 Year Experience</span>
         <span>🎓 MCA Qualified</span>
-<span>💡 Building AI Assistant & Web Projects</span>
+        <span>💡 Building AI Assistant & Web Projects</span>
         <span>📚 Passionate about teaching and CS trends</span>
       </div>
-    </div>
+    </article>
+    <article class="card" style="margin-top: 20px; padding: 20px; background: #1c2a38;">
+      <h3 style="color: #00e5ff; margin-top: 0;">🛠 Skills</h3>
+      <ul style="list-style: none; padding-left: 0; line-height: 1.8; font-size: 15px; color: #ddd;">
+        <li>✔ Java, JSP, Servlet</li>
+        <li>✔ HTML, CSS, JavaScript</li>
+        <li>✔ MySQL</li>
+        <li>✔ AI Assistant Development</li>
+        <li>✔ PDF & Report Generation</li>
+        <li>✔ Web App Deployment</li>
+        <li>✔ Teaching & Mentoring</li>
+      </ul>
+    </article>
+    <article style="max-width: 600px; margin: 40px auto; background: rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; box-shadow: 0 0 20px rgba(0,255,255,0.1);">
+      <h3 style="text-align:center; color:#00e5ff;">📬 Contact Me</h3>
+      <form onsubmit="sendMail(event)">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" required placeholder="Your name" style="width:100%; padding:10px; margin-top:6px; margin-bottom:12px; border-radius:6px; border:none; outline:none;">
+        <label for="message">Message:</label><br>
+        <textarea id="message" rows="5" required placeholder="Type your message here..." style="width:100%; padding:10px; border-radius:6px; border:none; outline:none;"></textarea>
+        <button type="submit" style="margin-top:15px; background:#00e5ff; color:#002147; font-weight:bold; padding:10px 20px; border:none; border-radius:8px; cursor:pointer;">Send via Gmail</button>
+        <a href="#" onclick="sendWhatsApp()" style="flex:1; text-align:center; background:#25D366; color:white; font-weight:bold; padding:10px 20px; border-radius:8px; text-decoration:none; display:inline-block;">WhatsApp Me</a>
+      </form>
+    </article>
+  </section>
+  <section class="note-boxes" aria-label="Chapter Notes">
+    <!-- Notes go here, unchanged for brevity -->
+      <div class="note-boxes">
 
-<div class="card" style="margin-top: 20px; padding: 20px; background: #1c2a38;">
-    <h3 style="color: #00e5ff; margin-top: 0;">🛠 Skills</h3>
-    <ul style="list-style: none; padding-left: 0; line-height: 1.8; font-size: 15px; color: #ddd;">
-      <li>✔ Java, JSP, Servlet</li>
-      <li>✔ HTML, CSS, JavaScript</li>
-      <li>✔ MySQL</li>
-      <li>✔ AI Assistant Development</li>
-      <li>✔ PDF & Report Generation</li>
-      <li>✔ Web App Deployment</li>
-      <li>✔ Teaching & Mentoring</li>
-    </ul>
-  </div>
-
-<!-- Contact Form -->
-<div style="max-width: 600px; margin: 40px auto; background: rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; box-shadow: 0 0 20px rgba(0,255,255,0.1);">
-  <h3 style="text-align:center; color:#00e5ff;">📬 Contact Me</h3>
-  <form onsubmit="sendMail(event)">
-    <label>Name:</label><br>
-    <input type="text" id="name" required style="width:100%; padding:10px; margin-top:6px; margin-bottom:12px; border-radius:6px; border:none; outline:none;" placeholder="Your name">
-
-    <label>Message:</label><br>
-    <textarea id="message" rows="5" required style="width:100%; padding:10px; border-radius:6px; border:none; outline:none;" placeholder="Type your message here..."></textarea>
-
-    <button type="submit" style="margin-top:15px; background:#00e5ff; color:#002147; font-weight:bold; padding:10px 20px; border:none; border-radius:8px; cursor:pointer;">
-      Send via Gmail
-    </button>
-<a href="#" onclick="sendWhatsApp()" style="flex:1; text-align:center; background:#25D366; color:white; font-weight:bold; padding:10px 20px; border-radius:8px; text-decoration:none; display:inline-block;">
-        WhatsApp Me
-      </a>
-  </form>
-</div>
-  </div>
-
-  <!-- Chapter Notes -->
-  <div class="note-boxes">
     <div class="note-box">
+
       <p>Chapter 1: Computer System</p>
       <a href="https://drive.google.com/file/d/1d16lc1eDeq3fm88GmGwWSQGcLfscqsI5/view?usp=drivesdk" target="_blank">📥 Download Notes</a>
     </div>
@@ -276,13 +256,11 @@
 
 
   </div>
-</div>
-
-<!-- 3D Hover Script -->
+  </section>
+</main>
 <script>
   const card = document.getElementById("card");
   const isMobile = window.matchMedia("(max-width: 768px)").matches;
-
   if (!isMobile) {
     document.querySelector(".card-container").addEventListener("mousemove", (e) => {
       const { offsetWidth: width, offsetHeight: height } = card;
@@ -293,19 +271,13 @@
       const rotateY = (x / width) * -15;
       card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     });
-
     document.querySelector(".card-container").addEventListener("mouseleave", () => {
       card.style.transform = `rotateX(0deg) rotateY(0deg)`;
     });
   }
-</script>
-
-<!-- Binary Animation Script -->
-<script>
   const binaryContainer = document.getElementById('binary-bg');
   const binaryChars = ['0', '1'];
   const count = 80;
-
   for (let i = 0; i < count; i++) {
     const bin = document.createElement('div');
     bin.classList.add('binary');
@@ -315,27 +287,26 @@
     bin.innerText = binaryChars[Math.floor(Math.random() * 2)];
     binaryContainer.appendChild(bin);
   }
-</script>
-
-<script>
+  const email = "pvs90666@gmail.com";
+  const whatsappNumber = "919741215397";
   function sendMail(event) {
     event.preventDefault();
     const name = document.getElementById("name").value.trim();
     const message = document.getElementById("message").value.trim();
     const subject = encodeURIComponent("Message from " + name);
     const body = encodeURIComponent(message);
-    const email = "pvs90666@gmail.com";
     const mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
     window.open(mailtoLink, '_blank');
   }
-function sendWhatsApp() {
+  function sendWhatsApp() {
     const name = document.getElementById("name").value.trim();
     const message = document.getElementById("message").value.trim();
     const fullMessage = `Hello, I'm ${name}. ${message}`;
     const encodedMessage = encodeURIComponent(fullMessage);
-    const whatsappURL = `https://wa.me/919741215397?text=${encodedMessage}`;
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
     window.open(whatsappURL, '_blank');
   }
 </script>
 </body>
-</html>
+  </html>
+  
