@@ -1,5 +1,7 @@
 Perfect! Since your site is **both a portfolio** and a **resource hub for 1st PUC Computer Science notes** at **Universal PU College**, here’s an enhanced, **tailored `README.md`** that reflects **both purposes**:
 
+[![engineeringinkannada.in](https://img.shields.io/badge/Visit-Punith%20R.in-blue?style=for-the-badge&logo=google-chrome)](https://punithpvr.github.io/Notes)
+
 ---
 
 # 👨‍🏫 Punith R – Lecturer Portfolio & CS Notes Hub
