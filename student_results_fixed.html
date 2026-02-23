@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Universal Pre University College – Result Portal</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --gold:#f5c518; --gold2:#e6a817;
+      --navy:#0a1628; --navy2:#112240; --navy3:#1a3a6b;
+      --accent:#2563eb;
+    }
+    body {
+      min-height:100vh;
+      background:var(--navy);
+      font-family:'Poppins',sans-serif;
+      overflow-x:hidden;
+    }
+
+    /* Stars */
+    .stars { position:fixed; inset:0; pointer-events:none; z-index:0; }
+    .star  { position:absolute; background:#fff; border-radius:50%; animation:twinkle ease-in-out infinite; }
+    @keyframes twinkle {
+      0%,100%{ opacity:.1; transform:scale(1); }
+      50%    { opacity:.9; transform:scale(1.5); }
+    }
+
+    /* Particles */
+    #particles { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+    .particle  { position:absolute; border-radius:50%; animation:float linear infinite; opacity:0; }
+    @keyframes float {
+      0%  { transform:translateY(100vh) scale(0); opacity:0; }
+      10% { opacity:.6; }
+      90% { opacity:.3; }
+      100%{ transform:translateY(-10vh) scale(1); opacity:0; }
+    }
+
+    /* Page */
+    .page {
+      position:relative; z-index:1;
+      min-height:100vh;
+      display:flex; flex-direction:column; align-items:center;
+      padding:30px 20px 60px;
+    }
+
+    /* Header */
+    .college-header { text-align:center; margin-bottom:36px; animation:slideDown .8s ease; }
+    @keyframes slideDown {
+      from{ opacity:0; transform:translateY(-40px); }
+      to  { opacity:1; transform:translateY(0); }
+    }
+    .emblem {
+      width:90px; height:90px;
+      background:linear-gradient(135deg,var(--gold),var(--gold2));
+      border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:2.6rem;
+      margin:0 auto 16px;
+      box-shadow:0 0 0 6px rgba(245,197,24,.15),0 0 40px rgba(245,197,24,.35);
+      animation:glow 3s ease-in-out infinite;
+    }
+    @keyframes glow {
+      0%,100%{ box-shadow:0 0 0 6px rgba(245,197,24,.15),0 0 40px rgba(245,197,24,.35); }
+      50%    { box-shadow:0 0 0 14px rgba(245,197,24,.07),0 0 80px rgba(245,197,24,.55); }
+    }
+    .college-name { font-size:1.9rem; font-weight:800; color:#fff; line-height:1.2; }
+    .college-name span { color:var(--gold); }
+    .college-sub { color:#94a3b8; font-size:.82rem; margin-top:6px; letter-spacing:2.5px; text-transform:uppercase; }
+    .divider-line { width:180px; height:2px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin:14px auto 0; border-radius:2px; }
+
+    /* Card */
+    .main-card {
+      background:rgba(255,255,255,.04);
+      backdrop-filter:blur(20px);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:24px;
+      padding:40px 36px;
+      width:100%; max-width:500px;
+      box-shadow:0 30px 80px rgba(0,0,0,.5);
+      animation:fadeUp .9s ease .2s both;
+    }
+    @keyframes fadeUp {
+      from{ opacity:0; transform:translateY(40px); }
+      to  { opacity:1; transform:translateY(0); }
+    }
+
+    .portal-title { text-align:center; margin-bottom:28px; }
+    .portal-title h2 { color:#fff; font-size:1.25rem; font-weight:700; }
+    .portal-title p  { color:#64748b; font-size:.82rem; margin-top:4px; }
+
+    /* Input */
+    .input-group { margin-bottom:16px; }
+    .input-group label {
+      display:block; color:var(--gold);
+      font-size:.78rem; font-weight:600;
+      letter-spacing:1.2px; text-transform:uppercase;
+      margin-bottom:10px;
+    }
+    .input-wrap { position:relative; }
+    .input-wrap .icon { position:absolute; left:16px; top:50%; transform:translateY(-50%); font-size:1.2rem; pointer-events:none; }
+    .input-wrap input {
+      width:100%;
+      padding:15px 16px 15px 48px;
+      background:rgba(255,255,255,.06);
+      border:1.5px solid rgba(255,255,255,.12);
+      border-radius:12px;
+      color:#fff;
+      font-size:1.05rem;
+      font-family:'Poppins',sans-serif;
+      font-weight:600;
+      outline:none;
+      transition:border .3s, background .3s;
+      letter-spacing:2px;
+    }
+    .input-wrap input::placeholder{ color:#475569; font-weight:400; letter-spacing:1px; }
+    .input-wrap input:focus { border-color:var(--gold); background:rgba(245,197,24,.05); }
+
+    /* Button */
+    .result-btn {
+      width:100%; padding:15px;
+      background:linear-gradient(135deg,var(--gold),var(--gold2));
+      color:var(--navy);
+      border:none; border-radius:12px;
+      font-size:1rem; font-weight:800;
+      font-family:'Poppins',sans-serif;
+      cursor:pointer; letter-spacing:1px;
+      transition:transform .2s, box-shadow .2s, opacity .2s;
+      box-shadow:0 8px 30px rgba(245,197,24,.35);
+      display:flex; align-items:center; justify-content:center; gap:10px;
+    }
+    .result-btn:hover { transform:translateY(-2px); box-shadow:0 14px 40px rgba(245,197,24,.55); }
+    .result-btn:active { transform:translateY(0); }
+    .result-btn:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+
+    .spinner {
+      width:20px; height:20px;
+      border:3px solid rgba(0,0,0,.2);
+      border-top-color:var(--navy);
+      border-radius:50%;
+      animation:spin .7s linear infinite;
+      display:none;
+    }
+    @keyframes spin{ to{ transform:rotate(360deg); } }
+
+    /* Error */
+    .error-box {
+      display:none; margin-top:18px;
+      background:rgba(239,68,68,.1);
+      border:1px solid rgba(239,68,68,.3);
+      border-radius:12px;
+      padding:14px 18px;
+      text-align:center;
+      color:#fca5a5; font-size:.88rem;
+      animation:shake .4s ease;
+    }
+    @keyframes shake {
+      0%,100%{ transform:translateX(0); }
+      25%    { transform:translateX(-8px); }
+      75%    { transform:translateX(8px); }
+    }
+
+    /* Result */
+    .result-card {
+      display:none; margin-top:28px;
+      border-radius:18px; overflow:hidden;
+      border:1px solid rgba(245,197,24,.2);
+      animation:zoomIn .5s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes zoomIn {
+      from{ opacity:0; transform:scale(.85); }
+      to  { opacity:1; transform:scale(1); }
+    }
+
+    .result-top {
+      background:linear-gradient(135deg,var(--navy3),var(--accent));
+      padding:22px 24px 18px;
+      text-align:center;
+      position:relative;
+    }
+    .result-top::after {
+      content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+      background:linear-gradient(90deg,var(--gold),#fff,var(--gold));
+    }
+    .result-top .trophy { font-size:2rem; margin-bottom:6px; }
+    .result-top h3 { color:#fff; font-size:1.1rem; font-weight:700; }
+    .result-top .reg-tag {
+      display:inline-block;
+      background:rgba(255,255,255,.15);
+      color:var(--gold); font-size:.78rem;
+      padding:3px 14px; border-radius:20px;
+      margin-top:6px; font-weight:600; letter-spacing:1.5px;
+    }
+
+    .subjects-wrap { background:rgba(10,22,40,.85); padding:20px; }
+    .sub-title { color:#64748b; font-size:.72rem; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:12px; }
+    .subjects-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .sub-item {
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:10px;
+      padding:10px 14px;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .sub-item .sname { color:#94a3b8; font-size:.78rem; }
+    .sub-item .smark { color:#fff; font-weight:700; font-size:1rem; }
+    .sub-item .smark.pass { color:#4ade80; }
+    .sub-item .smark.fail { color:#f87171; }
+
+    .totals-bar {
+      background:rgba(10,22,40,.95);
+      border-top:1px solid rgba(255,255,255,.06);
+      display:flex; justify-content:space-around;
+      padding:18px; gap:10px;
+    }
+    .tot-item { text-align:center; flex:1; }
+    .tot-item .tlabel { color:#64748b; font-size:.7rem; text-transform:uppercase; letter-spacing:1px; }
+    .tot-item .tvalue { font-size:1.7rem; font-weight:800; margin-top:2px; }
+    .tot-item .tvalue.tc { color:#60a5fa; }
+    .tot-item .tvalue.tp { color:#4ade80; }
+    .tot-divider { width:1px; background:rgba(255,255,255,.08); }
+
+    .grade-bar {
+      text-align:center;
+      padding:14px;
+      font-size:.95rem; font-weight:700;
+      border-top:1px solid rgba(255,255,255,.06);
+      background:rgba(10,22,40,.95);
+      letter-spacing:.5px;
+    }
+
+    /* Footer */
+    .footer { margin-top:40px; text-align:center; color:#334155; font-size:.75rem; animation:fadeUp 1s ease .5s both; }
+
+    @media(max-width:480px){
+      .main-card{ padding:28px 20px; }
+      .college-name{ font-size:1.4rem; }
+      .subjects-grid{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+<div id="particles"></div>
+
+<div class="page">
+
+  <!-- COLLEGE HEADER -->
+  <div class="college-header">
+    <div class="emblem">🎓</div>
+    <div class="college-name"><span>Universal</span> Pre University College</div>
+    <div class="college-sub">Excellence in Education</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- CARD -->
+  <div class="main-card">
+    <div class="portal-title">
+      <h2>📋 Student Result Portal</h2>
+      <p>Enter your registration number to view your marks</p>
+    </div>
+
+    <div class="input-group">
+      <label>Registration Number</label>
+      <div class="input-wrap">
+        <span class="icon">🪪</span>
+        <input type="text" id="regInput" placeholder="e.g. 2024001"
+               onkeydown="if(event.key==='Enter') searchResult()" autocomplete="off"/>
+      </div>
+    </div>
+
+    <button class="result-btn" id="searchBtn" onclick="searchResult()">
+      <div class="spinner" id="spinner"></div>
+      <span id="btnText">🔍 VIEW MY RESULT</span>
+    </button>
+
+    <div class="error-box" id="errorBox">❌ Registration number not found.<br/>Please check and try again.</div>
+
+    <div class="result-card" id="resultCard"></div>
+  </div>
+
+  <div class="footer">© 2025 Universal Pre University College. All Rights Reserved.</div>
+</div>
+
+<script>
+  // ── Your Google Sheet ID ──────────────────────────────────────────────────
+  const SHEET_ID = "1xoJgGbQ9ReXspJ2H_8dG8oloj0vtg9Xm";
+  // CSV export URL — works publicly if sheet is shared "Anyone with link → Viewer"
+  const CSV_URL  = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
+  /* ══════════════════════════════════════════════════ */
+
+  let studentsData = [];
+  let dataLoaded   = false;
+
+  function parseCSV(text) {
+    const lines = text.trim().split('\n');
+    const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+    studentsData = lines.slice(1).map(line => {
+      // Handle quoted fields with commas inside
+      const vals = [];
+      let cur = '', inQ = false;
+      for (let ch of line) {
+        if (ch === '"') { inQ = !inQ; }
+        else if (ch === ',' && !inQ) { vals.push(cur.trim()); cur = ''; }
+        else cur += ch;
+      }
+      vals.push(cur.trim());
+      const obj = {};
+      headers.forEach((h, i) => obj[h] = vals[i] !== undefined ? vals[i].replace(/^"|"$/g,'') : '');
+      return obj;
+    });
+    dataLoaded = true;
+  }
+
+  // Silent preload on page load
+  window.addEventListener('load', () => {
+    fetch(CSV_URL)
+      .then(r => { if (!r.ok) throw 0; return r.text(); })
+      .then(parseCSV).catch(() => {});
+  });
+
+  async function searchResult() {
+    const reg = document.getElementById('regInput').value.trim();
+    document.getElementById('errorBox').style.display   = 'none';
+    document.getElementById('resultCard').style.display = 'none';
+    if (!reg) { shakeInput(); return; }
+
+    setLoading(true);
+
+    if (!dataLoaded) {
+      try {
+        const text = await fetch(CSV_URL).then(r => { if(!r.ok) throw 0; return r.text(); });
+        parseCSV(text);
+      } catch {
+        showErr('⚠️ Could not connect to results database.<br/>Make sure the Google Sheet is shared as <b>Anyone with link → Viewer</b>.');
+        setLoading(false); return;
+      }
+    }
+
+    setLoading(false);
+
+    const student = studentsData.find(row =>
+      String(Object.values(row)[0]).trim().toLowerCase() === reg.toLowerCase()
+    );
+
+    if (!student) { document.getElementById('errorBox').style.display = 'block'; return; }
+    renderResult(student);
+  }
+
+  function renderResult(s) {
+    const keys   = Object.keys(s);
+    const regKey = keys[0];
+    const totalKey = keys[keys.length - 2];
+    const pctKey   = keys[keys.length - 1];
+    const nameKeys = ['name','Name','Student Name','student name','STUDENT NAME'];
+    const nameKey  = keys.find(k => nameKeys.includes(k));
+    const subjectKeys = keys.slice(1, keys.length - 2).filter(k => !nameKeys.includes(k));
+
+    const total = s[totalKey];
+    const pct   = parseFloat(s[pctKey]) || 0;
+
+    const subHtml = subjectKeys.map(k => {
+      const m   = parseFloat(s[k]);
+      const cls = isNaN(m) ? '' : m >= 35 ? 'pass' : 'fail';
+      return `<div class="sub-item"><span class="sname">${k}</span><span class="smark ${cls}">${s[k]}</span></div>`;
+    }).join('');
+
+    let grade, gc;
+    if      (pct >= 90){ grade='🏆 Outstanding — Grade O'; gc='#facc15'; }
+    else if (pct >= 75){ grade='⭐ Excellent — Grade A';   gc='#4ade80'; }
+    else if (pct >= 60){ grade='👍 Good — Grade B';        gc='#60a5fa'; }
+    else if (pct >= 50){ grade='✅ Average — Grade C';     gc='#a78bfa'; }
+    else if (pct >= 35){ grade='⚠️ Below Average — D';    gc='#fb923c'; }
+    else               { grade='❌ Fail — Grade F';         gc='#f87171'; }
+
+    const card = document.getElementById('resultCard');
+    card.innerHTML = `
+      <div class="result-top">
+        <div class="trophy">🎓</div>
+        <h3>${nameKey ? s[nameKey] : 'Result Card'}</h3>
+        <div class="reg-tag">REG NO: ${s[regKey]}</div>
+      </div>
+      <div class="subjects-wrap">
+        <div class="sub-title">Subject Marks</div>
+        <div class="subjects-grid">${subHtml}</div>
+      </div>
+      <div class="totals-bar">
+        <div class="tot-item">
+          <div class="tlabel">Total Marks</div>
+          <div class="tvalue tc">${total}</div>
+        </div>
+        <div class="tot-divider"></div>
+        <div class="tot-item">
+          <div class="tlabel">Percentage</div>
+          <div class="tvalue tp">${pct.toFixed(1)}%</div>
+        </div>
+      </div>
+      <div class="grade-bar" style="color:${gc}">${grade}</div>
+    `;
+    card.style.display = 'block';
+    card.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  }
+
+  function setLoading(on) {
+    document.getElementById('spinner').style.display = on ? 'block' : 'none';
+    document.getElementById('btnText').textContent   = on ? 'Loading…' : '🔍 VIEW MY RESULT';
+    document.getElementById('searchBtn').disabled    = on;
+  }
+  function showErr(msg) { const e=document.getElementById('errorBox'); e.innerHTML=msg; e.style.display='block'; }
+  function shakeInput() {
+    const i = document.getElementById('regInput');
+    i.style.animation='none'; i.getBoundingClientRect(); i.style.animation='shake .4s ease';
+    i.style.borderColor='#ef4444';
+    setTimeout(()=>i.style.borderColor='',1000);
+  }
+
+  /* Stars */
+  const starsEl = document.getElementById('stars');
+  for(let i=0;i<80;i++){
+    const s=document.createElement('div'); s.className='star';
+    const sz=Math.random()*2.5+.5;
+    s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*6}s;`;
+    starsEl.appendChild(s);
+  }
+
+  /* Particles */
+  const pEl=document.getElementById('particles');
+  const cols=['#f5c518','#2563eb','#22c55e','#a78bfa','rgba(255,255,255,0.6)'];
+  for(let i=0;i<20;i++){
+    const p=document.createElement('div'); p.className='particle';
+    const sz=Math.random()*7+3;
+    p.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;background:${cols[Math.floor(Math.random()*cols.length)]};animation-duration:${9+Math.random()*12}s;animation-delay:${Math.random()*12}s;`;
+    pEl.appendChild(p);
+  }
+</script>
+</body>
+</html>
